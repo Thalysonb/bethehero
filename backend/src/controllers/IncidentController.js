@@ -39,7 +39,9 @@ module.exports = {
     async deleteById(request, response){
         let {id} = request.params;
         let ong_id = request.headers.authorization;
+        console.log("primeiro", ong_id, id);
         let incident = await connection('incidents').where('id', id).select('ong_id').first();
+        console.log(ong_id, incident.ong_id);
         if(ong_id != incident.ong_id){
             return response.status(401).json({error: "não permitido"});
         }
